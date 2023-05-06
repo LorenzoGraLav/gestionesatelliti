@@ -2,6 +2,7 @@ package it.prova.gestionesatelliti.web.controller;
 
 import java.util.List;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,6 +67,46 @@ public class SatelliteController {
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/satellite";
 	}
+	
+	@GetMapping("/show/{idSatellite}")
+	public String show(@PathVariable(required = true) Long idSatellite, Model model) {
+		model.addAttribute("show_satellite_attr", satelliteService.caricaSingoloElemento(idSatellite));
+		return "satellite/show";
+	}
+	
+	@GetMapping("/delete/{idSatellite}")
+	public String delete(@PathVariable(required = true) Long idSatellite, Model model) {
+		model.addAttribute("delete_satellite_attr", satelliteService.caricaSingoloElemento(idSatellite));
+		return "satellite/delete";
+	}
+
+	@PostMapping("/delete")
+	public String delete(Long id,RedirectAttributes redirectAttrs) {
+		satelliteService.rimuovi(id);
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/satellite";
+	}
+	
+	@GetMapping("/edit/{idSatellite}")
+	public String edit(@PathVariable(required = true) Long idSatellite, Model model) {
+		model.addAttribute("edit_satellite_attr", satelliteService.caricaSingoloElemento(idSatellite));
+		
+		return "satellite/edit";
+	}
+	
+	
+	 @PostMapping("/update")
+	 public String update(@Valid @ModelAttribute("edit_satellite_attr") Satellite satellite, BindingResult result,
+	 RedirectAttributes redirectAttrs) {
+
+	 if (result.hasErrors())
+	 return "satellite/edit";
+
+	 satelliteService.aggiorna(satellite);
+
+	 redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+	 return "redirect:/satellite";
+	 }
 	
 	
 	
