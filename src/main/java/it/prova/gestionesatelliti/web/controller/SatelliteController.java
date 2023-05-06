@@ -43,28 +43,28 @@ public class SatelliteController {
 	@PostMapping("/list")
 	public String listByExample(Satellite example, ModelMap model) {
 		List<Satellite> results = satelliteService.findByExample(example);
-		model.addAttribute("impiegato_list_attribute", results);
+		model.addAttribute("satellite_list_attribute", results);
 		return "satellite/list";
 	}
 	
 	@GetMapping("/insert")
 	public String create(Model model) {
 		model.addAttribute("insert_satellite_attr", new Satellite());
-		return "Satellite/insert";
+		return "satellite/insert";
 	}
 	
-//	@PostMapping("/save")
-//	public String save(@Valid @ModelAttribute("insert_impiegato_attr") Impiegato impiegato, BindingResult result,
-//			RedirectAttributes redirectAttrs) {
-//
-//		if (result.hasErrors())
-//			return "impiegato/insert";
-//
-//		impiegatoService.inserisciNuovo(impiegato);
-//
-//		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-//		return "redirect:/impiegato";
-//	}
+	@PostMapping("/save")
+	public String save(@Valid @ModelAttribute("insert_satellite_attr") Satellite satellite, BindingResult result,
+			RedirectAttributes redirectAttrs) {
+
+		if (result.hasErrors())
+			return "satellite/insert";
+
+		satelliteService.inserisciNuovo(satellite);
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/satellite";
+	}
 	
 	
 	
