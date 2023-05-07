@@ -1,6 +1,8 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "form" uri = "http://www.springframework.org/tags/form" %>
+<%@ page import="java.time.LocalDate" %>
 <!doctype html>
 <html lang="it" class="h-100" >
 	 <head>
@@ -33,8 +35,21 @@
 				  Aggiungere d-none nelle class per non far apparire
 				   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
 				</div>
-		  
-		  
+		 		 <div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none':'' }" role="alert">
+					  ${errorMessage}
+					  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+					</div>
+					<div class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+					  Esempio di operazione fallita!
+					  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+					</div>
+					<div class="alert alert-info alert-dismissible fade show d-none" role="alert">
+					  Aggiungere d-none nelle class per non far apparire
+					   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+					</div>
+					
+					
+		  <c:set var="today" value="<%= new java.util.Date() %>"/>
 		  
 		  		<div class='card'>
 				    <div class='card-header'>
@@ -53,6 +68,7 @@
 				                        <th>Data di rientro</th>
 				                        <th>Stato</th>
 				                        <th>Azioni</th>
+				                        <th>Extra</th>
 				                    </tr>
 				                </thead>
 				                <tbody>
@@ -74,6 +90,20 @@
 												<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/satellite/edit/${SatelliteItem.id }">Edit</a>
 												<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/satellite/delete/${SatelliteItem.id }">Delete</a>
 											</td>
+											<td>
+												<c:if test="${SatelliteItem.stato == null && SatelliteItem.dataLancio == null} " > 
+												<form:form method="post" action="${pageContext.request.contextPath}/satellite/lancia">
+												    <input type="hidden" name="id" value="${SatelliteItem.id}">
+												    <button type="submit" class="btn btn-success btn-sm">Lancia</button>
+												</form:form>
+												</c:if>
+												<c:if test="${SatelliteItem.dataLancio != null && SatelliteItem.dataRientro == null}">
+												<form:form method="post" action="${pageContext.request.contextPath}/satellite/rientro"  >
+													<input type="hidden" name="id" value="${SatelliteItem.id}">
+													<button type="submit" class="btn btn-warning btn-sm">Rientra</button>
+												</form:form>
+												</c:if>
+												</td>
 										</tr>
 									</c:forEach>
 				                </tbody>
@@ -81,7 +111,7 @@
 				        </div>
 				        
 				        <div class="col-12">
-							<a href="${pageContext.request.contextPath}/satellite/search" class='btn btn-outline-secondary' style='width:80px'>
+							<a href="${pageContext.request.contextPath}/home" class='btn btn-outline-secondary' style='width:80px'>
 					            <i class='fa fa-chevron-left'></i> Back 
 					        </a>
 						</div>

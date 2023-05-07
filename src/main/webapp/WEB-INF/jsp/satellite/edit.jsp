@@ -13,7 +13,7 @@
 			}
 		</style>
 
-	<title>Aggiorna Elemento</title>
+	<title>aggiorna Elemento</title>
 	 </head>
 	   <body class="d-flex flex-column h-100">
 	   
@@ -48,41 +48,33 @@
 			  
 					  <div class='card'>
 						    <div class='card-header'>
-						        <h5>Aggiorna elemento</h5> 
+						        <h5>Modifica elemento</h5> 
 						    </div>
 						    <div class='card-body'>
-				
-									<h6 class="card-title">I campi con <span class="text-danger">*</span> sono obbligatori</h6>
-									
-									
-									
-				
-				
+
 									<form:form modelAttribute="edit_satellite_attr" method="post" action="${pageContext.request.contextPath}/satellite/update" class="row g-3" novalidate="novalidate">
 									
 									
 										<div class="col-md-6">
-											<label for="denominazione" class="form-label">Denominazione <span class="text-danger">*</span></label>
+											<label for="denominazione" class="form-label">Denominazione</label>
 											<spring:bind path="denominazione">
-												<input type="text" name="denominazione" id="denominazione" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire la denominazione" value="${edit_satellite_attr.denominazione }" required>
+												<input type="text" name="denominazione" id="denominazione" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire denominazione" value="${edit_satellite_attr.denominazione }" required>
 											</spring:bind>
 											<form:errors  path="denominazione" cssClass="error_field" />
 										</div>
 										
 										<div class="col-md-6">
-											<label for="codice" class="form-label">Codice <span class="text-danger">*</span></label>
+											<label for="codice" class="form-label">Codice </label>
 											<spring:bind path="codice">
-												<input type="text" name="codice" id="codice" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il codice" value="${edit_satellite_attr.codice }" required>
+												<input type="text" name="codice" id="codice" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire codice" value="${edit_satellite_attr.codice }" required>
 											</spring:bind>
 											<form:errors  path="codice" cssClass="error_field" />
 										</div>
-									
-										
 										
 										<fmt:parseDate value="${edit_satellite_attr.dataLancio}" pattern="yyyy-MM-dd" var="localDateToBeParsed" type="date"/>
 										<fmt:formatDate pattern="yyyy-MM-dd" value="${localDateToBeParsed}" var="parsedDate"/>
 										<div class="col-md-3">
-											<label for="dataLancio" class="form-label">Data di Lancio <span class="text-danger">*</span></label>
+											<label for="dataDiNascita" class="form-label">Data di lancio <span class="text-danger">*</span></label>
 		                        			<spring:bind path="dataLancio">
 			                        		<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataLancio" type="date" placeholder="dd/MM/yy"
 			                            		title="formato : gg/mm/aaaa"  name="dataLancio" required 
@@ -91,11 +83,10 @@
 			                            	<form:errors  path="dataLancio" cssClass="error_field" />
 										</div>
 										
-					
 										<fmt:parseDate value="${edit_satellite_attr.dataRientro}" pattern="yyyy-MM-dd" var="localDateToBeParsed" type="date"/>
 										<fmt:formatDate pattern="yyyy-MM-dd" value="${localDateToBeParsed}" var="parsedDate"/>
 										<div class="col-md-3">
-											<label for="dataRientro" class="form-label">Data di Rientro <span class="text-danger">*</span></label>
+											<label for="dataDiNascita" class="form-label">Data di rientro <span class="text-danger">*</span></label>
 		                        			<spring:bind path="dataRientro">
 			                        		<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataRientro" type="date" placeholder="dd/MM/yy"
 			                            		title="formato : gg/mm/aaaa"  name="dataRientro" required 
@@ -110,7 +101,7 @@
 											    <select class="form-select ${status.error ? 'is-invalid' : ''}" id="stato" name="stato" required>
 											    	<option value="" selected> - Selezionare - </option>
 											    	<option value="FISSO" ${edit_satellite_attr.stato == 'FISSO'?'selected':''}>FISSO</option>
-											      	<option value="IN_MOVIMENTO" ${edit_satellite_attr.stato == 'IN_MOVIMENTO'?'selected':''}>IN_MOVIMENTO</option>
+											      	<option value="IN_MOVIMENTO" ${edit_satellite_attr.stato == 'IN_MOVIMENTO'?'selected':''}>IN MOVIMENTO</option>
 											      	<option value="DISABILITATO" ${edit_satellite_attr.stato == 'DISABILITATO'?'selected':''}>DISABILITATO</option>
 										    	</select>
 										    </spring:bind>
@@ -121,6 +112,10 @@
 										
 									<div class="col-12">
 										<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
+									<a href="${pageContext.request.contextPath}/satellite"
+										class='btn btn-outline-secondary' style='width: 80px'> <i
+										class='fa fa-chevron-left'></i> Back
+									</a> 
 									</div>
 				
 								</form:form>

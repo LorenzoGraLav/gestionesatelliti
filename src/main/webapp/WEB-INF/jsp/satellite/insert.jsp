@@ -59,9 +59,9 @@
 									
 									
 										<div class="col-md-6">
-											<label for="denominazione" class="form-label">Denominazione <span class="text-danger">*</span></label>
+											<label for="denominazione" class="form-label">denominazione <span class="text-danger">*</span></label>
 											<spring:bind path="denominazione">
-												<input type="text" name="denominazione" id="denominazione" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire la denominazione" value="${insert_satellite_attr.denominazione }" required>
+												<input type="text" name="denominazione" id="denominazione" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire denominazione" value="${insert_satellite_attr.denominazione }" required>
 											</spring:bind>
 											<form:errors  path="denominazione" cssClass="error_field" />
 										</div>
@@ -92,7 +92,7 @@
 										<fmt:parseDate value="${insert_satellite_attr.dataRientro}" pattern="yyyy-MM-dd" var="localDateToBeParsed" type="date"/>
 										<fmt:formatDate pattern="yyyy-MM-dd" value="${localDateToBeParsed}" var="parsedDate"/>
 										<div class="col-md-3">
-											<label for="dataRientro" class="form-label">Data di rientro </label>
+											<label for="dataRientro" class="form-label">Data di ritorno </label>
 			                        		<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataRientro" type="date" placeholder="dd/MM/yy"
 			                            		title="formato : gg/mm/aaaa"  name="dataRientro" required 
 			                            		value="${parsedDate}" >		           
@@ -100,13 +100,13 @@
 										</div>
 										
 										<div class="col-md-3">
-											<label for="stato" class="form-label">Stato <span class="text-danger">*</span></label>
+											<label for="stato" class="form-label">Stato</label>
 										    <spring:bind path="stato">
 											    <select class="form-select ${status.error ? 'is-invalid' : ''}" id="stato" name="stato" required>
 											    	<option value="" selected> - Selezionare - </option>
 											    	<option value="IN_MOVIMENTO" ${insert_satellite_attr.stato == 'IN_MOVIMENTO'?'selected':''}>IN MOVIMENTO</option>
 											      	<option value="FISSO" ${insert_satellite_attr.stato == 'FISSO'?'selected':''}>FISSO</option>
-											      	<option value="DISABILITATO" ${insert_satellite_attr.stato == 'DISABILITATO'?'selected':''}>DISABILITATOS</option>
+											      	<option value="DISABILITATO" ${insert_satellite_attr.stato == 'DISABILITATO'?'selected':''}>DISABILITATO</option>
 										    	</select>
 										    </spring:bind>
 										    <form:errors  path="stato" cssClass="error_field" />
@@ -115,8 +115,11 @@
 										
 									<div class="col-12">
 										<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
+									    <a href="${pageContext.request.contextPath}/satellite"
+											class='btn btn-outline-secondary' style='width: 80px'> <i
+											class='fa fa-chevron-left'></i> Back
+										</a> 
 									</div>
-				
 								</form:form>
 		  
 						    

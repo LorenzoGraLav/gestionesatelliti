@@ -18,4 +18,15 @@ public interface SatelliteService {
 	
 	public List<Satellite> findByExample(Satellite example);
 	
+	public void lancio(Long id);
+
+	public void rientro(Long id);
+
+	public List<Satellite> lanciatiDa2AnniOPiuAttivi();
+
+	public List<Satellite> disattivatiMaNonRientrati();
+
+	public List<Satellite> RimastiInOrbitaDieciAnniEFissi();
+
+	
 }
