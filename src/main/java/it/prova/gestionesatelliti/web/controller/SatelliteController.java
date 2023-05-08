@@ -1,6 +1,7 @@
 package it.prova.gestionesatelliti.web.controller;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 
@@ -245,6 +246,22 @@ public class SatelliteController {
 		model.addAttribute("satellite_list_attribute", results);
 		return "satellite/list";
 	}
+	
+	
+	 @GetMapping("/confermaDisabilita")
+	 public String confermaDisabilita(Model model) {
+	 int quanti = satelliteService.listAllElements().size();
+	 int quantiRientra = satelliteService.satellitiChePossonoRientrare().size();
+	 model.addAttribute("quanti_satellite_attr", quanti);
+	 model.addAttribute("rientrano_satellite_attr", quantiRientra);
+	 return "satellite/emergenza";
+	 }
+	 @PostMapping("/avvioDisabilita")
+	 public String avvioDisabilita(@ModelAttribute("rientro_satellite_attr") Satellite satellite,RedirectAttributes redirectAttrs) {
+	 satelliteService.rientraTuttiSatellitiPossibili();
+	 redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+	 return "redirect:/satellite";
+	 }
 	 
 	 
 	

@@ -107,7 +107,7 @@
 			      </div>
 			    </div>
 			  </div>
-			  
+				<a class="btn btn-danger btn-sm" href="${pageContext.request.contextPath}/satellite/confermaDisabilita" style="margin-left: 85%;">DISABILITA TUTTI</a>			  
 			</main>
 			
 			<!-- Footer -->

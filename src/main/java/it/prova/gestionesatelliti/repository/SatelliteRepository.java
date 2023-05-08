@@ -29,4 +29,7 @@ public interface SatelliteRepository extends CrudRepository<Satellite, Long>,Jpa
 
 	List<Satellite> findAllByStatoAndDataLancioLessThan(StatoSatellite statoSatellite, LocalDate dataLancio);
 	
+	@Query("select s from Satellite s where s.dataLancio is not NULL AND s.dataRientro is NULL AND s.stato != 'DISABILITATO'")
+    List<Satellite> findSatellitesByDataLancioAndStatoSatellite();
+	
 }

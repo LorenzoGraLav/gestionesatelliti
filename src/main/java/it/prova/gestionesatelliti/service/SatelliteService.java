@@ -1,5 +1,6 @@
 package it.prova.gestionesatelliti.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import it.prova.gestionesatelliti.model.Satellite;
@@ -27,6 +28,12 @@ public interface SatelliteService {
 	public List<Satellite> disattivatiMaNonRientrati();
 
 	public List<Satellite> RimastiInOrbitaDieciAnniEFissi();
+
+	public List<Satellite> satellitiChePossonoRientrare();
+
+	public void rientraTuttiSatellitiPossibili();
+	
+	
 
 	
 }

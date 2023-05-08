@@ -118,5 +118,20 @@ public class SatelliteServiceImpl implements SatelliteService {
 		return repository.findAllByStatoAndDataLancioLessThan(StatoSatellite.FISSO, LocalDate.now().minusYears(10));
 	}
 
+	@Override
+	public List<Satellite> satellitiChePossonoRientrare() {
+		return repository.findSatellitesByDataLancioAndStatoSatellite();
+	}
+
+	@Override
+	public void rientraTuttiSatellitiPossibili() {
+		List<Satellite> listaSat = repository.findSatellitesByDataLancioAndStatoSatellite();
+		for (Satellite satelliteItem : listaSat) {
+		satelliteItem.setDataRientro(LocalDate.now());
+		satelliteItem.setStato(StatoSatellite.DISABILITATO);
+		repository.save(satelliteItem);
+      }
+	}		
+
 
 }
